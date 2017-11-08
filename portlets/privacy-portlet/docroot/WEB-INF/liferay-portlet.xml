@@ -8,6 +8,9 @@
 		<use-default-template>false</use-default-template>
 		<instanceable>false</instanceable>
 		<header-portlet-css>/css/main.css</header-portlet-css>
+		<header-portlet-css>/js/jquery-ui-1.11.3.custom/jquery-ui.css</header-portlet-css>
+		<header-portlet-javascript>/js/jquery-1.12.3.min.js</header-portlet-javascript>
+		<header-portlet-javascript>/js/jquery-ui-1.11.3.custom/jquery-ui.js</header-portlet-javascript>
 		<css-class-wrapper>smc-privacy-portlet</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 		<system>true</system>

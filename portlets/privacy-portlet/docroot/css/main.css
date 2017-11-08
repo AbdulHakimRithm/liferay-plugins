@@ -3,7 +3,6 @@
 
 	.privacy-info-message {
 		position: fixed;
-		bottom: 0px;
 		left: 0px;
 		right: 0px;
 		margin: 0px;
@@ -32,5 +31,30 @@
 		.privacy-info-message-journal-article {
 			display: inline-block;
 		}
+	}
+	
+	.privacy-position-top {
+		top: 0px;
+	}
+		
+	.privacy-position-bottom {
+		bottom: 0px;
+	}
+	
+	.privacy-banner-close {
+		padding-right: 6px !important;
+	}
+	
+	.privacy-container {
+		display: -webkit-flex;
+    	display: flex;
+	}
+	
+	.flex-1 {
+	    -webkit-flex: 2;
+	    flex: 2;
+	    max-width: 1170px;
+	    margin-left: auto;
+	    margin-right: auto;
 	}
 }

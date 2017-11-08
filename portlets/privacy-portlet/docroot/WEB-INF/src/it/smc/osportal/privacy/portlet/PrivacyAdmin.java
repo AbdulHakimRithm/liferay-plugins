@@ -50,7 +50,10 @@ public class PrivacyAdmin extends MVCPortlet {
 
 			String cookieExpiration = ParamUtil.getString(
 					actionRequest,"cookie-expiration");
-
+			
+			String position = ParamUtil.getString(
+					actionRequest,"position");
+			
 			boolean resetPreviousCookies=ParamUtil.getBoolean(
 					actionRequest, "reset-previous-cookies");
 
@@ -65,6 +68,7 @@ public class PrivacyAdmin extends MVCPortlet {
 				preferences.setValue("privacyInfoId", privacyInfoId);
 				preferences.setValue("privacyEnabled", privacyEnabled);
 				preferences.setValue("cookieExpiration", cookieExpiration);
+				preferences.setValue("position", position);
 
 				if (resetPreviousCookies){
 					Date now=new Date();

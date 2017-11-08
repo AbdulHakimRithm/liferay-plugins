@@ -4,6 +4,7 @@
  */
 --%>
 
+<%@page import="com.liferay.portal.kernel.util.HtmlUtil"%>
 <%@ include file="/init.jsp" %>
 
 <c:if test="<%= privacyInfoMessage %>">
@@ -12,40 +13,69 @@
 		<c:if test="<%= Validator.isNotNull(privacyInfoMessageArticleId) %>">
 			<aui:layout>
 				<aui:column columnWidth="100" first="true" last="true">
-						<liferay-ui:journal-article
-							articleId="<%= privacyInfoMessageArticleId %>"
-							groupId="<%= groupId %>"
-							showTitle="false"
-						/>
+					<div class="privacy-container">
+						<div class="flex-1">
+							<liferay-ui:journal-article articleId="<%= privacyInfoMessageArticleId %>" groupId="<%= groupId %>" showTitle="false"/>
+							
+							<a href="#" onclick="openPrivacyDetailDialog()" id="<portlet:namespace />readMore">
+							    <b><liferay-ui:message key="privacy-open-detail"/></b>
+							</a>
+						</div>
 
-						<liferay-portlet:renderURL var="viewPrivacyPolicyURL" windowState="<%= LiferayWindowState.MAXIMIZED.toString() %>">
-						    <portlet:param name="jspPage" value="/display/view_privacy_policy.jsp" />
-						</liferay-portlet:renderURL>
-
-						<liferay-portlet:renderURL var="viewPrivacyPolicyPopUpURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
-						    <portlet:param name="jspPage" value="/display/view_privacy_policy.jsp" />
-						</liferay-portlet:renderURL>
-
-						<a
-						    class="btn"
-						    data-href="<%= HtmlUtil.escapeAttribute(viewPrivacyPolicyPopUpURL) %>"
-						    href="<%= HtmlUtil.escapeAttribute(viewPrivacyPolicyURL) %>"
-						    id="<portlet:namespace />readMore"
-						    title="<%= HtmlUtil.escapeAttribute(privacyPolicy.getTitle(locale)) %>"
-						>
-						    <liferay-ui:message key="read-more" />
-						</a>
-						<aui:button cssClass="btn btn-primary" name="okButton" value="ok" />
-
+						<div>
+							<aui:button cssClass="btn btn-primary close privacy-banner-close" aria-label="Close" name="okButton" icon="fa fa-times"/>						
+						</div>
+					</div>
 				</aui:column>
 			</aui:layout>
 		</c:if>
 	</div>
-
-	<liferay-portlet:renderURL var="viewPrivacyPolicyURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
-		<portlet:param name="jspPage" value="/display/view_privacy_policy.jsp" />
-	</liferay-portlet:renderURL>
-
+	
+	<%@ include file="view_privacy_policy.jsp" %>
+	
+	<script>
+		function openPrivacyDetailDialog() {
+			console.log("called");
+			
+			$('#<portlet:namespace />privacy-policy').dialog({
+				modal: true,
+				width: 400,
+				dialogClass: 'privacy-cookie-dialog'
+			});
+		}
+	</script>
+	
+	<!-- <div id="privacyCookieDialog"></div> -->
+	
+	<%-- <script>
+		var groupId = <%= groupId %>;
+		var privacyPolicyArticleId = <%= privacyPolicyArticleId %>;
+		
+		console.log(groupId);
+		console.log(privacyPolicyArticleId);
+		
+		function openPrivacyDetailDialog() {
+			console.log(groupId);
+			console.log(privacyPolicyArticleId);
+			
+			var html = "<liferay-portlet:renderURL windowState='<%= LiferayWindowState.POP_UP.toString() %>' portletName='<%= PortletKeys.JOURNAL %>'>" +
+				 "<portlet:param name='struts_action' value='/journal/view_article_content' />"+
+				 "<portlet:param name='articleId' value='<%= String.valueOf(privacyPolicyArticleId) %>' />" +
+				 "<portlet:param name='groupId' value='<%= String.valueOf(groupId) %>' />" +
+				"</liferay-portlet:renderURL>";
+			
+			var popup = Liferay.Popup({
+				width: 680,
+				modal: true,
+				noDraggable: true,
+				noTitleBar: true,
+				message: "",
+				messageId: "title"});
+			
+			$(popup).load(html);
+		}
+	</script> --%>
+	
 	<aui:script use="aui-base,aui-io-deprecated,cookie,liferay-util-window">
 		var okButton = A.one('#<portlet:namespace />okButton');
 		var readMore = A.one('#<portlet:namespace />readMore');
@@ -56,15 +86,15 @@
 
 			e.halt();
 		});
-
-		readMore.on(
+		
+		/* readMore.on(
 			'click',
 			function(event) {
 				if (!event.metaKey && !event.ctrlKey) {
 					Liferay.Util.openInDialog(event);
 				}
 			}
-		);
+		); */
 
 		var wrapper = A.one('#wrapper');
 
@@ -96,6 +126,15 @@
 				hideStripPrivacyInfoMessage.on('click', hidePrivacyMessage);
 			}
 
+		}
+		
+		var position = "<%= position %>";
+		if (position == "top") {
+			privacyInfoMessage.addClass("privacy-position-top");
+			privacyInfoMessage.removeClass("privacy-position-bottom");
+		} else {
+			privacyInfoMessage.removeClass("privacy-position-top");
+			privacyInfoMessage.addClass("privacy-position-bottom");
 		}
 	</aui:script>
 

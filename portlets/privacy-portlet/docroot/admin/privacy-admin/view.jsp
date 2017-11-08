@@ -27,7 +27,33 @@
 
 			<aui:input name="cookie-expiration" value="<%= String.valueOf(cookieExpiration) %>" />
 
-			<aui:input name="reset-previous-cookies" type="checkbox" id="resetPreviousCookies" checked="flase" />
+			<aui:input name="reset-previous-cookies" type="checkbox" id="resetPreviousCookies" checked="true" />
+			
+			<aui:field-wrapper name="position">
+			
+				<c:set var="position" value="<%= position %>"/>
+				
+				<c:choose>
+				
+					<c:when test="${position == 'top'}" >
+					
+						<aui:input inlineLabel="right" name="position" type="radio" value="top" label="top" checked="<%= true %>" />
+						
+						<aui:input inlineLabel="right" name="position" type="radio" value="bottom" label="bottom" />
+						
+					</c:when>
+					
+					<c:otherwise>
+					
+						<aui:input inlineLabel="right" name="position" type="radio" value="top" label="top" />
+						
+						<aui:input inlineLabel="right" name="position" type="radio" value="bottom" label="bottom" checked="<%= true %>" />
+						
+					</c:otherwise>
+					
+				</c:choose>
+				
+			</aui:field-wrapper>
 
 		</div>
 
@@ -40,8 +66,8 @@
 </aui:form>
 
 <aui:script>
-	function <portlet:namespace />savePolicySettings() {
-		submitForm(document.<portlet:namespace />fm);
+	function <portlet:namespace/>savePolicySettings() {
+		submitForm(document.<portlet:namespace/>fm);
 	}
 </aui:script>
 

@@ -79,6 +79,9 @@ nameExtend= String.valueOf(groupId)+nameExtend;
 JournalArticle privacyPolicy =
 	PrivacyUtil.getPrivacyPolicy(groupId, privacyPolicyArticleId);
 
+String position = GetterUtil.getString(
+		preferences.getValue("position", StringPool.BLANK),"top");
+
 boolean privacyInfoMessage = PrivacyUtil.showPrivacyInfoMessage(
 	themeDisplay.isSignedIn(), privacyEnabled, privacyPolicy, request,
 	groupId, locale,nameExtend);
