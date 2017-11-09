@@ -27,7 +27,7 @@
 
 			<aui:input name="cookie-expiration" value="<%= String.valueOf(cookieExpiration) %>" />
 
-			<aui:input name="reset-previous-cookies" type="checkbox" id="resetPreviousCookies" checked="true" />
+			<aui:input name="reset-previous-cookies" type="checkbox" id="resetPreviousCookies" checked="false" />
 			
 			<aui:field-wrapper name="position">
 			
