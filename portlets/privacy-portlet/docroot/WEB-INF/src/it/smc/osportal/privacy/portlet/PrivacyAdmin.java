@@ -54,6 +54,33 @@ public class PrivacyAdmin extends MVCPortlet {
 			String position = ParamUtil.getString(
 					actionRequest,"position");
 			
+			String bannerColor = ParamUtil.getString(
+					actionRequest,"privacy-banner-color");
+			
+			if (!bannerColor.contains("#")) {
+				if (bannerColor.matches("-?[0-9a-fA-F]+")) {
+					bannerColor = "#" + bannerColor; 
+				}
+			}
+			
+			String bannerFontColor = ParamUtil.getString(
+					actionRequest,"privacy-banner-font-color");
+			
+			if (!bannerFontColor.contains("#")) {
+				if (bannerFontColor.matches("-?[0-9a-fA-F]+")) {
+					bannerFontColor = "#" + bannerFontColor; 
+				}
+			}
+			
+			String readMoreColor = ParamUtil.getString(
+					actionRequest,"privacy-readmore-color");
+			
+			if (!readMoreColor.contains("#")) {
+				if (readMoreColor.matches("-?[0-9a-fA-F]+")) {
+					readMoreColor = "#" + readMoreColor; 
+				}
+			}
+			
 			boolean resetPreviousCookies=ParamUtil.getBoolean(
 					actionRequest, "reset-previous-cookies");
 
@@ -69,6 +96,9 @@ public class PrivacyAdmin extends MVCPortlet {
 				preferences.setValue("privacyEnabled", privacyEnabled);
 				preferences.setValue("cookieExpiration", cookieExpiration);
 				preferences.setValue("position", position);
+				preferences.setValue("bannerColor", bannerColor);
+				preferences.setValue("bannerFontColor", bannerFontColor);
+				preferences.setValue("readMoreColor", readMoreColor);
 
 				if (resetPreviousCookies){
 					Date now=new Date();

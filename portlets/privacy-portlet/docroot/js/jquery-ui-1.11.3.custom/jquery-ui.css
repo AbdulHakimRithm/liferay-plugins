@@ -1225,9 +1225,9 @@ body .ui-tooltip {
 }
 
 /* Custom Css */
-	.privacy-cookie-dialog {
-		border-color: #c1c1c1;
-	}
+.privacy-cookie-dialog {
+	border-color: #c1c1c1;
+}
 
 .privacy-cookie-dialog .ui-dialog-titlebar {
 	background-color: white !important;

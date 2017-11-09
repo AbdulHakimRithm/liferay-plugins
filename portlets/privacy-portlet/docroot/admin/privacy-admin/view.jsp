@@ -54,6 +54,16 @@
 				</c:choose>
 				
 			</aui:field-wrapper>
+			
+			<aui:field-wrapper name="color">
+				
+				<aui:input name="privacy-banner-color" value="<%= bannerColor %>" />
+				
+				<aui:input name="privacy-banner-font-color" value="<%= bannerFontColor %>" />
+				
+				<aui:input name="privacy-readmore-color" value="<%= readMoreColor %>" />
+				
+			</aui:field-wrapper>
 
 		</div>
 

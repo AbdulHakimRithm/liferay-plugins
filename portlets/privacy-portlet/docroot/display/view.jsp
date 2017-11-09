@@ -9,15 +9,15 @@
 
 <c:if test="<%= privacyInfoMessage %>">
 
-	<div class="privacy-info-message" id="<portlet:namespace />privacy-info-message">
+	<div class="privacy-info-message" id="<portlet:namespace />privacy-info-message" style="background-color: <%= bannerColor %>;">
 		<c:if test="<%= Validator.isNotNull(privacyInfoMessageArticleId) %>">
 			<aui:layout>
 				<aui:column columnWidth="100" first="true" last="true">
 					<div class="privacy-container">
-						<div class="flex-1">
+						<div class="flex-1" style="color:<%= bannerFontColor %>;">
 							<liferay-ui:journal-article articleId="<%= privacyInfoMessageArticleId %>" groupId="<%= groupId %>" showTitle="false"/>
 							
-							<a href="#" onclick="openPrivacyDetailDialog()" id="<portlet:namespace />readMore">
+							<a href="#" onclick="openPrivacyDetailDialog()" id="<portlet:namespace />readMore" style="color:<%= readMoreColor %>;">
 							    <b><liferay-ui:message key="privacy-open-detail"/></b>
 							</a>
 						</div>

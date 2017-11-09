@@ -79,8 +79,13 @@ nameExtend= String.valueOf(groupId)+nameExtend;
 JournalArticle privacyPolicy =
 	PrivacyUtil.getPrivacyPolicy(groupId, privacyPolicyArticleId);
 
-String position = GetterUtil.getString(
-		preferences.getValue("position", StringPool.BLANK),"top");
+String position = preferences.getValue("position", "top");
+
+String bannerColor = preferences.getValue("bannerColor", "#5fba98");
+
+String bannerFontColor = preferences.getValue("bannerFontColor", "#ffffff");
+
+String readMoreColor = preferences.getValue("readMoreColor", "#008d66");
 
 boolean privacyInfoMessage = PrivacyUtil.showPrivacyInfoMessage(
 	themeDisplay.isSignedIn(), privacyEnabled, privacyPolicy, request,
