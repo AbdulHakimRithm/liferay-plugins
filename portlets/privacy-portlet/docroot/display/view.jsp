@@ -16,10 +16,6 @@
 					<div class="privacy-container">
 						<div class="flex-1" style="color:<%= bannerFontColor %>;">
 							<liferay-ui:journal-article articleId="<%= privacyInfoMessageArticleId %>" groupId="<%= groupId %>" showTitle="false"/>
-							
-							<a href="#" onclick="openPrivacyDetailDialog()" id="<portlet:namespace />readMore" style="color:<%= readMoreColor %>;">
-							    <b><liferay-ui:message key="privacy-open-detail"/></b>
-							</a>
 						</div>
 
 						<div>
@@ -34,54 +30,44 @@
 	<%@ include file="view_privacy_policy.jsp" %>
 	
 	<script>
-		function openPrivacyDetailDialog() {
-			console.log("called");
+		Liferay.on('portletReady', function (event) {
+			var privacyPortletPosition = "<%= position %>";
+			if (privacyPortletPosition == "top") {
+				$('#top-privacy-portlet').show();
+				$('#bottom-privacy-portlet').hide();
+			} else {
+				$('#top-privacy-portlet').hide();
+				$('#bottom-privacy-portlet').show();
+				
+			}
 			
+			setReadMoreColor();
+		});
+		
+		function openPrivacyDetailDialog() {
 			$('#<portlet:namespace />privacy-policy').dialog({
 				modal: true,
 				width: 400,
 				dialogClass: 'privacy-cookie-dialog'
 			});
 		}
+		
+		function setReadMoreColor() {
+			//var readMoreButton = $('#privacyPolicyReadMore');
+			var readMoreButtonColor = "<%= readMoreColor %>";
+			
+			$("a[id*='privacyPolicyReadMore']").each(function (i, el) {
+		        $(this).css('color',readMoreButtonColor);
+		    });
+		}
 	</script>
 	
-	<!-- <div id="privacyCookieDialog"></div> -->
-	
-	<%-- <script>
-		var groupId = <%= groupId %>;
-		var privacyPolicyArticleId = <%= privacyPolicyArticleId %>;
-		
-		console.log(groupId);
-		console.log(privacyPolicyArticleId);
-		
-		function openPrivacyDetailDialog() {
-			console.log(groupId);
-			console.log(privacyPolicyArticleId);
-			
-			var html = "<liferay-portlet:renderURL windowState='<%= LiferayWindowState.POP_UP.toString() %>' portletName='<%= PortletKeys.JOURNAL %>'>" +
-				 "<portlet:param name='struts_action' value='/journal/view_article_content' />"+
-				 "<portlet:param name='articleId' value='<%= String.valueOf(privacyPolicyArticleId) %>' />" +
-				 "<portlet:param name='groupId' value='<%= String.valueOf(groupId) %>' />" +
-				"</liferay-portlet:renderURL>";
-			
-			var popup = Liferay.Popup({
-				width: 680,
-				modal: true,
-				noDraggable: true,
-				noTitleBar: true,
-				message: "",
-				messageId: "title"});
-			
-			$(popup).load(html);
-		}
-	</script> --%>
-	
 	<aui:script use="aui-base,aui-io-deprecated,cookie,liferay-util-window">
-		var okButton = A.one('#<portlet:namespace />okButton');
-		var readMore = A.one('#<portlet:namespace />readMore');
+		var okButton = A.all('#<portlet:namespace />okButton');
+		var readMore = A.all('#<portlet:namespace />readMore');
 
 		okButton.on('click', function(e) {
-
+			
 			hidePrivacyMessage();
 
 			e.halt();
@@ -96,29 +82,32 @@
 			}
 		); */
 
-		var wrapper = A.one('#wrapper');
+		//var wrapper = A.one('#wrapper');
 
-		var privacyInfoMessage = A.one('.smc-privacy-portlet .privacy-info-message');
+		var privacyInfoMessage = A.all('.smc-privacy-portlet .privacy-info-message');
 
 		if (privacyInfoMessage) {
-			wrapper.addClass('wrapper-for-privacy-portlet');
+			//wrapper.addClass('wrapper-for-privacy-portlet');
 
-			var hideStripPrivacyInfoMessage = privacyInfoMessage.one('.hide-strip-privacy-info-message');
+			var hideStripPrivacyInfoMessage = privacyInfoMessage.all('.hide-strip-privacy-info-message');
 
 			var hidePrivacyMessage = function() {
+				
+				privacyInfoMessage.each(function() {
+					this.ancestor('.smc-privacy-portlet').hide();
+				});
+				
+				// renewal
+				var today = new Date();
+				var expire = new Date();
+				var nDays=<%= cookieExpiration %>;
+				expire.setTime(today.getTime() + 3600000*24*nDays);
+				var expString="expires="+expire.toGMTString();
+				cookieName = "<%= PrivacyUtil.PRIVACY_READ %><%=nameExtend %>";
+				cookieValue =today.getTime();
+				document.cookie = cookieName+"="+escape(cookieValue)+ ";expires="+expire.toGMTString();
 
-				privacyInfoMessage.ancestor('.smc-privacy-portlet').hide();
-					// renewal
-					var today = new Date();
-					var expire = new Date();
-					var nDays=<%= cookieExpiration %>;
-					expire.setTime(today.getTime() + 3600000*24*nDays);
-					var expString="expires="+expire.toGMTString();
-					cookieName = "<%= PrivacyUtil.PRIVACY_READ %><%=nameExtend %>";
-					cookieValue =today.getTime();
-					document.cookie = cookieName+"="+escape(cookieValue)+ ";expires="+expire.toGMTString();
-
-				wrapper.removeClass('wrapper-for-privacy-portlet');
+				//wrapper.removeClass('wrapper-for-privacy-portlet');
 			}
 
 			if (hideStripPrivacyInfoMessage) {

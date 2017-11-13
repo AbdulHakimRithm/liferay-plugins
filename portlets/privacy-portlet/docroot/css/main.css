@@ -2,7 +2,6 @@
 .aui .smc-privacy-portlet {
 
 	.privacy-info-message {
-		position: fixed;
 		left: 0px;
 		right: 0px;
 		margin: 0px;
@@ -43,6 +42,8 @@
 	
 	.privacy-banner-close {
 		padding-right: 6px !important;
+		position: absolute;
+		right: 0;
 	}
 	
 	.privacy-container {

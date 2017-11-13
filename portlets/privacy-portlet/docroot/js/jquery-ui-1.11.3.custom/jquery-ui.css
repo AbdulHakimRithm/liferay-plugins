@@ -1242,6 +1242,10 @@ body .ui-tooltip {
     border-color: white !important;
 }
 
+.privacy-cookie-dialog .ui-dialog-titlebar-close > .ui-button-text {
+	display: none !important;
+}
+
 .privacy-cookie-dialog > .ui-dialog-content {
     padding-top: 0px !important;
 }
