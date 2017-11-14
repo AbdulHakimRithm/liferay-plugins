@@ -8,7 +8,12 @@
 <%@ include file="/init.jsp" %>
 
 <c:if test="<%= privacyInfoMessage %>">
-
+	
+	<script>
+		var scripts = document.scripts;
+		console.log(scripts);
+	</script>
+	
 	<div class="privacy-info-message" id="<portlet:namespace />privacy-info-message" style="background-color: <%= bannerColor %>;">
 		<c:if test="<%= Validator.isNotNull(privacyInfoMessageArticleId) %>">
 			<aui:layout>
@@ -31,6 +36,8 @@
 	
 	<script>
 		Liferay.on('portletReady', function (event) {
+			//$('.portlet-dropzone .smc-privacy-portlet').hide();
+			
 			var privacyPortletPosition = "<%= position %>";
 			if (privacyPortletPosition == "top") {
 				$('#top-privacy-portlet').show();
@@ -38,7 +45,6 @@
 			} else {
 				$('#top-privacy-portlet').hide();
 				$('#bottom-privacy-portlet').show();
-				
 			}
 			
 			setReadMoreColor();
@@ -82,12 +88,12 @@
 			}
 		); */
 
-		//var wrapper = A.one('#wrapper');
+		var wrapper = A.one('#wrapper');
 
 		var privacyInfoMessage = A.all('.smc-privacy-portlet .privacy-info-message');
 
 		if (privacyInfoMessage) {
-			//wrapper.addClass('wrapper-for-privacy-portlet');
+			wrapper.addClass('wrapper-for-privacy-portlet');
 
 			var hideStripPrivacyInfoMessage = privacyInfoMessage.all('.hide-strip-privacy-info-message');
 
@@ -107,7 +113,7 @@
 				cookieValue =today.getTime();
 				document.cookie = cookieName+"="+escape(cookieValue)+ ";expires="+expire.toGMTString();
 
-				//wrapper.removeClass('wrapper-for-privacy-portlet');
+				wrapper.removeClass('wrapper-for-privacy-portlet');
 			}
 
 			if (hideStripPrivacyInfoMessage) {

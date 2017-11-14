@@ -1223,29 +1223,3 @@ body .ui-tooltip {
 	filter: Alpha(Opacity=30); /* support: IE8 */
 	border-radius: 8px;
 }
-
-/* Custom Css */
-.privacy-cookie-dialog {
-	border-color: #c1c1c1;
-}
-
-.privacy-cookie-dialog .ui-dialog-titlebar {
-	background-color: white !important;
-	border-color: white !important;
-    padding-bottom: 0px;
-    height: 23px;
-    padding-top: 0px;
-}
-
-.privacy-cookie-dialog .ui-dialog-titlebar-close {
-    background: none !important;
-    border-color: white !important;
-}
-
-.privacy-cookie-dialog .ui-dialog-titlebar-close > .ui-button-text {
-	display: none !important;
-}
-
-.privacy-cookie-dialog > .ui-dialog-content {
-    padding-top: 0px !important;
-}
