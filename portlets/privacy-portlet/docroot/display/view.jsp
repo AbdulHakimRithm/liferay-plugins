@@ -9,11 +9,6 @@
 
 <c:if test="<%= privacyInfoMessage %>">
 	
-	<script>
-		var scripts = document.scripts;
-		console.log(scripts);
-	</script>
-	
 	<div class="privacy-info-message" id="<portlet:namespace />privacy-info-message" style="background-color: <%= bannerColor %>;">
 		<c:if test="<%= Validator.isNotNull(privacyInfoMessageArticleId) %>">
 			<aui:layout>
