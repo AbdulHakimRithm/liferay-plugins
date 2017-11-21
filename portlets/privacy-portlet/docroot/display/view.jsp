@@ -19,7 +19,7 @@
 						</div>
 
 						<div>
-							<aui:button cssClass="btn btn-primary close privacy-banner-close" aria-label="Close" name="okButton" icon="fa fa-times"/>						
+							<aui:button cssClass="btn btn-primary close privacy-banner-close" aria-label="Close" id="okButton" name="okButton" icon="fa fa-times"/>						
 						</div>
 					</div>
 				</aui:column>
@@ -43,6 +43,12 @@
 			}
 			
 			setReadMoreColor();
+			
+			$(document).click(function(e) {
+			    if (e.target.id != '<portlet:namespace />privacy-info-message' && !$('#<portlet:namespace />privacy-info-message').find(e.target).length) {
+			        $("#<portlet:namespace />okButton").trigger('click');
+			    }
+			});
 		});
 		
 		function openPrivacyDetailDialog() {
