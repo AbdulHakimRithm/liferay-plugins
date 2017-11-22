@@ -29,6 +29,21 @@
 
 			<aui:input name="reset-previous-cookies" type="checkbox" id="resetPreviousCookies" checked="false" />
 			
+			<c:choose>
+			
+				<c:when test="<%= closeOnclickOutside %>">
+				
+					<aui:input name="close-onclick-outside" type="checkbox" id="closeOnclickOutside" checked="true" />
+				
+				</c:when>
+				<c:otherwise>
+					
+					<aui:input name="close-onclick-outside" type="checkbox" id="closeOnclickOutside" checked="false" />
+					
+				</c:otherwise>
+			
+			</c:choose>
+			
 			<aui:field-wrapper name="position">
 			
 				<c:set var="position" value="<%= position %>"/>

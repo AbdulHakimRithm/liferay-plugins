@@ -87,6 +87,9 @@ String bannerFontColor = preferences.getValue("bannerFontColor", "#ffffff");
 
 String readMoreColor = preferences.getValue("readMoreColor", "#008d66");
 
+boolean closeOnclickOutside = GetterUtil.getBoolean(
+		preferences.getValue("closeOnclickOutside", "true"));
+
 boolean privacyInfoMessage = PrivacyUtil.showPrivacyInfoMessage(
 	themeDisplay.isSignedIn(), privacyEnabled, privacyPolicy, request,
 	groupId, locale,nameExtend);

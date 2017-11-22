@@ -44,8 +44,9 @@
 			
 			setReadMoreColor();
 			
+			var closeOnclickOutside = <%= closeOnclickOutside %>;
 			$(document).click(function(e) {
-			    if (e.target.id != '<portlet:namespace />privacy-info-message' && !$('#<portlet:namespace />privacy-info-message').find(e.target).length) {
+			    if (closeOnclickOutside && e.target.id != '<portlet:namespace />privacy-info-message' && !$('#<portlet:namespace />privacy-info-message').find(e.target).length) {
 			        $("#<portlet:namespace />okButton").trigger('click');
 			    }
 			});

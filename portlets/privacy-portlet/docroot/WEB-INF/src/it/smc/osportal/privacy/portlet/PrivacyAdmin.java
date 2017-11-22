@@ -81,7 +81,10 @@ public class PrivacyAdmin extends MVCPortlet {
 				}
 			}
 			
-			boolean resetPreviousCookies=ParamUtil.getBoolean(
+			boolean closeOnclickOutside = ParamUtil.getBoolean(
+					actionRequest, "close-onclick-outside");
+			
+			boolean resetPreviousCookies = ParamUtil.getBoolean(
 					actionRequest, "reset-previous-cookies");
 
 			try {
@@ -99,6 +102,7 @@ public class PrivacyAdmin extends MVCPortlet {
 				preferences.setValue("bannerColor", bannerColor);
 				preferences.setValue("bannerFontColor", bannerFontColor);
 				preferences.setValue("readMoreColor", readMoreColor);
+				preferences.setValue("closeOnclickOutside", String.valueOf(closeOnclickOutside));
 
 				if (resetPreviousCookies){
 					Date now=new Date();
